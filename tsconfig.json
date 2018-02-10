@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "alwaysStrict": true,           /* Parse in strict mode and emit "use strict" for each source file. */
+    "declaration": true,            /* Generates corresponding '.d.ts' file. */
+    "module": "commonjs",           /* Specify module code generation: 'commonjs', 'amd', 'system', 'umd' or 'es2015'. */
+    "newLine": "lf",
+    "outDir": "./dist", 
+    "pretty": true,
+    "strict": true,                 /* Enable all strict type-checking options. */
+    // "noImplicitAny": false,
+    // "noImplicitThis": false,
+    "target": "ES2017",              /* ECMAScript target : 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', or 'ESNEXT'. */
+    "types" : ["node"]
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "exclude": [
+    "asset/",
+    "dist/",
+    "test/",
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}

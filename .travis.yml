@@ -1,0 +1,26 @@
+if: tag IS blank
+
+language: node_js
+node_js:
+- '8'
+- '9'
+
+cache:
+  directories:
+    - node_modules
+
+before_install:
+  - openssl version
+  - openssl ecparam -list_curves
+  - npm install
+
+
+install: true
+
+script:
+  - npm run build
+  - npm run test:travis
+
+after_success:
+    #  - npm run cov:coveralls
+
