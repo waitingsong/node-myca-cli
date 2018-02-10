@@ -100,6 +100,7 @@ function init(): Promise<string> {
 function initCa(options: myca.CaOpts): Promise<string> {
   return myca.initCaCert(options).then((certRet) => {
     return `CA certificate created with:
+  centerName: "${certRet.centerName}"
   crtFile: "${certRet.crtFile}"
   privateKeyFile: "${certRet.privateKeyFile}"
     `
