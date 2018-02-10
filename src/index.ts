@@ -81,6 +81,9 @@ export function runCmd(args: CliArgs): Promise<string | void> {
     case 'init':
       return init()
 
+    case 'initca':
+      return initCa(<myca.CaOpts> options)
+
     default:
       return Promise.reject(`invalid cmd: "${cmd}"`)
   }
@@ -93,3 +96,12 @@ function init(): Promise<string> {
   })
 }
 
+
+function initCa(options: myca.CaOpts): Promise<string> {
+  return myca.initCaCert(options).then((certRet) => {
+    return `CA certificate created with:
+  crtFile: "${certRet.crtFile}"
+  privateKeyFile: "${certRet.privateKeyFile}"
+    `
+  })
+}
