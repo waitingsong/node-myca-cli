@@ -73,3 +73,23 @@ function parseOpts(cmd: string, options: {[prop: string]: string | number}): Cli
 
   return caOpts
 }
+
+export function runCmd(args: CliArgs): Promise<string | void> {
+  const { cmd, options } = args
+
+  switch (cmd) {
+    case 'init':
+      return init()
+
+    default:
+      return Promise.reject(`invalid cmd: "${cmd}"`)
+  }
+}
+
+
+function init(): Promise<string> {
+  return myca.initDefaultCenter().then((centerPath) => {
+    return `Default center created at path: "${centerPath}"`
+  })
+}
+
