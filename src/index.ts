@@ -20,6 +20,7 @@ export function parseCliArgs(argv: {[prop: string]: string | number}): CliArgs {
   const cmdArr = <string | number[]> argv._
 
   args.cmd = parseCmd(cmdArr)
+  args.options = args.cmd === 'init' ? null : parseOpts(args.cmd , { ...argv, _: '' })
 
   return args
 }
@@ -48,3 +49,27 @@ function parseCmd(args: string | number[]): string {
   return command
 }
 
+
+function parseOpts(cmd: string, options: {[prop: string]: string | number}): CliArgs['options'] {
+  if (cmd === 'init') {
+    throw new Error('cmd should not be "init"')
+  }
+  const caOpts: CliArgs['options'] = cmd === 'initca'
+    ? { ...myca.initialCaOpts }
+    : { ...myca.initialCertOpts }
+  const propMap = <Map<string, string>> new Map() // <upperKey, oriKey>
+
+  Object.keys(caOpts).forEach(key => {
+    propMap.set(key.toUpperCase(), key)
+  })
+
+  Object.keys(options).forEach(key => {
+    const upperKey = key.toUpperCase()
+
+    if (propMap.has(upperKey)) {
+      caOpts[<string> propMap.get(upperKey)] = options[key]
+    }
+  })
+
+  return caOpts
+}
