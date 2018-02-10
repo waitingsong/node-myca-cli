@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "command line of creating Self-signed CA certificate for development use and issue server or client certificates, generated using openssl",
   "main": "./dist/index.js",
+  "bin": {
+    "myca": "./dist/bin/myca-cli.js"
+  },
   "scripts": {
     "build": "npm run clean && npm run lint && npm run build:ts && npm run jslint",
     "build:ts": "tsc -p ./ --outDir dist/",
