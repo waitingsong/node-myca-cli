@@ -71,7 +71,46 @@ function parseOpts(cmd: string, options: {[prop: string]: string | number}): Cli
     }
   })
 
+  if (cmd === 'issue') {
+    if (typeof caOpts.SAN !== 'undefined') {
+      const arr = parseMultiValue(caOpts.SAN)
+
+      if (arr && arr.length) {
+        caOpts.SAN = arr
+      }
+      else {
+        delete caOpts.SAN
+      }
+    }
+    if (typeof caOpts.ips !== 'undefined') {
+      const arr = parseMultiValue(caOpts.ips)
+
+      if (arr && arr.length) {
+        caOpts.ips = arr
+      }
+      else {
+        delete caOpts.ips
+      }
+    }
+  }
+
   return caOpts
+}
+
+function parseMultiValue(arg: any): string[] {
+  const arr = arg  ? String(arg).split(',') : []
+  const ret: string[] = []
+
+  if (arr.length) {
+    for (let value of arr) {
+      value = value.trim()
+      if (value) {
+        ret.push(value)
+      }
+    }
+  }
+
+  return ret
 }
 
 export function runCmd(args: CliArgs): Promise<string | void> {
