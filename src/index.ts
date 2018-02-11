@@ -10,9 +10,14 @@ import * as myca from 'myca'
 
 const cmdSet = new Set(['init', 'initca', 'issue', 'initcenter'])
 
+export interface InitCenterArgs {
+  name: string
+  path: string
+}
+
 export interface CliArgs {
   cmd: string
-  options: myca.CaOpts | myca.CertOpts | null // null for cmd:init
+  options: myca.CaOpts | myca.CertOpts | InitCenterArgs | null // null for cmd:init
 }
 
 export function parseCliArgs(argv: {[prop: string]: string | number}): CliArgs {
@@ -54,6 +59,11 @@ function parseOpts(cmd: string, options: {[prop: string]: string | number}): Cli
   if (cmd === 'init') {
     throw new Error('cmd should not be "init"')
   }
+
+  if (cmd === 'initcenter') {
+    return parseInitCenter(options)
+  }
+
   const caOpts: CliArgs['options'] = cmd === 'initca'
     ? { ...myca.initialCaOpts }
     : { ...myca.initialCertOpts }
@@ -113,6 +123,20 @@ function parseMultiValue(arg: any): string[] {
   return ret
 }
 
+function parseInitCenter(args: any): InitCenterArgs {
+  let { name, path } = args
+
+  name = String(name)
+  if ( ! name) {
+    throw new Error('value of name empty')
+  }
+  if ( ! path) {
+    throw new Error('value of path empty')
+  }
+
+  return { name, path }
+}
+
 export function runCmd(args: CliArgs): Promise<string | void> {
   const { cmd, options } = args
 
@@ -125,6 +149,9 @@ export function runCmd(args: CliArgs): Promise<string | void> {
 
     case 'issue':
       return issue(<myca.CertOpts> options)
+
+    case 'initcenter':
+      return initCenter(<InitCenterArgs> options)
 
     default:
       return Promise.reject(`invalid cmd: "${cmd}"`)
@@ -165,3 +192,15 @@ function issue(options: myca.CertOpts): Promise<string> {
     `
   })
 }
+
+function initCenter(options: InitCenterArgs): Promise<string> {
+  const { name, path } = options
+
+  return myca.initCenter(name, path).then(() => {
+    return `center created with:
+  centerName: "${name}"
+  path: "${path}"
+    `
+  })
+}
+
