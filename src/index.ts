@@ -155,7 +155,7 @@ function issue(options: myca.CertOpts): Promise<string> {
     return `Issue a Certificate with:
   pubKey: \n${ret.pubKey}\n
   pass: "${ret.pass}" ${ options.kind === 'server' ? `\n  privateKeyFile: "${ret.privateKeyFile}"` : ''}
-  privateUnsecureKeyFile: "${ret.privateUnsecureKeyFile}"
+  privateKeyFile: "${ret.privateKeyFile}" ${ options.kind === 'server' ? `\n  privateUnsecureKeyFile: "${ret.privateUnsecureKeyFile}"` : ''}
   centerName: "${ret.centerName}"
   caKeyFile: "${ret.caKeyFile}"
   caCrtFile: "${ret.caCrtFile}"
