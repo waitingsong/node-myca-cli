@@ -84,6 +84,9 @@ export function runCmd(args: CliArgs): Promise<string | void> {
     case 'initca':
       return initCa(<myca.CaOpts> options)
 
+    case 'issue':
+      return issue(<myca.CertOpts> options)
+
     default:
       return Promise.reject(`invalid cmd: "${cmd}"`)
   }
@@ -103,6 +106,23 @@ function initCa(options: myca.CaOpts): Promise<string> {
   centerName: "${certRet.centerName}"
   crtFile: "${certRet.crtFile}"
   privateKeyFile: "${certRet.privateKeyFile}"
+    `
+  })
+}
+
+
+function issue(options: myca.CertOpts): Promise<string> {
+  return myca.genCert(options).then((ret) => {
+    return `Issue a Certificate with:
+  pubKey: \n${ret.pubKey}\n
+  pass: "${ret.pass}" ${ options.kind === 'server' ? `\n  privateKeyFile: "${ret.privateKeyFile}"` : ''}
+  privateUnsecureKeyFile: "${ret.privateUnsecureKeyFile}"
+  centerName: "${ret.centerName}"
+  caKeyFile: "${ret.caKeyFile}"
+  caCrtFile: "${ret.caCrtFile}"
+  csrFile: "${ret.csrFile}"
+  crtFile: "${ret.crtFile}"
+  ${ options.kind === 'client' ? `pfxFile: "${ret.pfxFile}"` : ''}
     `
   })
 }
