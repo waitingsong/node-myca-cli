@@ -108,7 +108,7 @@ function parseOpts(cmd: string, options: {[prop: string]: string | number}): Cli
 }
 
 function parseMultiValue(arg: any): string[] {
-  const arr = arg  ? String(arg).split(',') : []
+  const arr = arg ? String(arg).split(',') : []
   const ret: string[] = []
 
   if (arr.length) {
