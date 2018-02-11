@@ -19,23 +19,26 @@ catch (ex) {
   console.log(ex.message)
 }
 
-cli.runCmd(args)
-  .then(ret => {
-    ret && console.log(ret)
-  })
-  .catch((err) => {
-    if (typeof err === 'string') {
-      console.log(err)
-    }
-    else if (err) {
-      if (err.message) {
-        console.log(err.message)
-      }
-      else {
+if (args && args.cmd) {
+  cli.runCmd(args)
+    .then(ret => {
+      ret && console.log(ret)
+    })
+    .catch((err) => {
+      if (typeof err === 'string') {
         console.log(err)
       }
-    }
-    else {
-      console.log('unknown error')
-    }
-  })
+      else if (err) {
+        if (err.message) {
+          console.log(err.message)
+        }
+        else {
+          console.log(err)
+        }
+      }
+      else {
+        console.log('unknown error')
+      }
+    })
+
+}
