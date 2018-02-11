@@ -1,6 +1,6 @@
 {
   "name": "myca-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "command line of creating Self-signed CA certificate for development use and issue server or client certificates, generated using openssl",
   "main": "./dist/index.js",
   "bin": {
