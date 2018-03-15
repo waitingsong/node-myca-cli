@@ -2,6 +2,12 @@
   // "extends": [
   //   "tslint-eslint-rules"
   // ],
+  "linterOptions": {
+    "exclude": [
+      "node_modules",
+      "*.d.ts"
+    ]
+  },
   "rules": {
     "array-bracket-spacing": [true, "never", {"singleValue": false, "objectsInArrays": true, "arraysInArrays": true} ],	// 设置在括号内使用空格风格
     "await-promise": [true, "Thenable"],  // Warns for an awaited value that is not a Promise.
