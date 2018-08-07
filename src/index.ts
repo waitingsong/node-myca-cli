@@ -124,7 +124,8 @@ function parseMultiValue(arg: any): string[] {
 }
 
 function parseInitCenter(args: any): InitCenterArgs {
-  let { name, path } = args
+  const { path } = args
+  let { name } = args
 
   name = String(name)
   if (! name) {
