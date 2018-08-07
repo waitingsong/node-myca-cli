@@ -1,25 +1,51 @@
 {
-  "name": "npm-base",
+  "name": "myca-cli",
   "author": "waiting",
-  "version": "0.0.1",
-  "description": "npm boilerplate",
-  "keywords": [],
+  "version": "0.1.1",
+  "description": "command line of creating Self-signed CA certificate for development use and issue server or client certificates, generated using openssl",
+  "keywords": [
+    "CA",
+    "cert",
+    "csr",
+    "certificate",
+    "ec",
+    "ecc",
+    "Elliptic Curve",
+    "openssl",
+    "pkcs",
+    "PKCS8",
+    "PKCS12",
+    "pfx",
+    "p12",
+    "P-256",
+    "P-384",
+    "prime256v1",
+    "secp384r1",
+    "RSA",
+    "self signed",
+    "SAN",
+    "SSL",
+    "TLS",
+    "x509"
+  ],
   "engines": {
     "node": ">=8.10.0"
   },
-  "bin": {},
+  "bin": {
+    "myca": "./dist/bin/myca-cli.js"
+  },
   "browser": "",
   "es2015": "./dist/index.esm.js",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bugs": {
-    "url": "https://github.com/waitingsong/npm-base/issues"
+    "url": "https://github.com/waitingsong/node-myca-cli/issues"
   },
-  "homepage": "https://github.com/waitingsong/npm-base#readme",
+  "homepage": "https://github.com/waitingsong/node-myca-cli#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/waitingsong/npm-base.git"
+    "url": "git+https://github.com/waitingsong/node-myca-cli.git"
   },
   "license": "MIT",
   "nyc": {
@@ -42,7 +68,9 @@
     "all": true
   },
   "dependencies": {
-    "rxjs": ">=6.2.0"
+    "myca": "^1.11.3",
+    "rxjs": ">=6.2.0",
+    "yargs": "^11.1.0"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.2",
@@ -69,8 +97,7 @@
     "ts-node": "latest",
     "tslint": "^5.10.0",
     "tslint-eslint-rules": "^5.3.1",
-    "typescript": "latest",
-    "yargs": "latest"
+    "typescript": "latest"
   },
   "scripts": {
     "bp:add": "git remote add bp https://github.com/waitingsong/npm-base",
