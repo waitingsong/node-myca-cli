@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /**
  * myca-cli
  * command: init|initca|issue|initcenter  case insensitive
