@@ -3,12 +3,11 @@
     "alwaysStrict": true,
     "charset": "utf8",
     "declaration": true, 
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "importHelpers": false,
     "inlineSourceMap": false,
-    "module": "ES6",
-    "moduleResolution": "node",
+    "module": "commonjs",
     "newLine": "lf",
     "noFallthroughCasesInSwitch": true,
     "outDir": "./dist", 
@@ -18,8 +17,8 @@
     "strict": true, 
     "noImplicitAny": true,
     "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "target": "ES2017"
+    "target": "ES2017",
+    "types" : ["node"]
   },
   "include": [
     "src/**/*"
@@ -28,7 +27,6 @@
     "asset/",
     "dist/",
     "test/",
-    "/test_browser*",
     "node_modules*",
     "**/*.d.ts",
     "**/*.spec.ts"

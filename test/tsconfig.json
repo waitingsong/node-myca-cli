@@ -2,33 +2,32 @@
   "compilerOptions": {
     "alwaysStrict": true,
     "charset": "utf8",
-    "declaration": true, 
+    "declaration": false, 
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": false,
     "inlineSourceMap": false,
-    "module": "ES6",
+    "module": "commonjs",
     "moduleResolution": "node",
     "newLine": "lf",
     "noFallthroughCasesInSwitch": true,
-    "outDir": "./dist", 
     "pretty": true,
     "skipLibCheck": true,
     "sourceMap": false,
     "strict": true, 
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
+    "noImplicitAny": false,
+    "noImplicitThis": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "target": "ES2017"
   },
   "include": [
-    "src/**/*"
+    "**/*.ts"
   ],
   "exclude": [
     "asset/",
     "dist/",
     "test/",
-    "/test_browser*",
     "node_modules*",
     "**/*.d.ts",
     "**/*.spec.ts"
