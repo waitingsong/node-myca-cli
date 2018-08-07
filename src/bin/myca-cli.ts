@@ -14,29 +14,30 @@ try {
   args = cli.parseCliArgs(yargs.argv)
 }
 catch (ex) {
-  console.log(ex.message)
+  console.info(ex.message)
 }
 
 if (args && args.cmd) {
   cli.runCmd(args)
     .then(ret => {
-      ret && console.log(ret)
+      ret && console.info(ret)
     })
     .catch(err => {
       if (typeof err === 'string') {
-        console.log(err)
+        console.info(err)
       }
       else if (err) {
         if (err.message) {
-          console.log(err.message)
+          console.info(err.message)
         }
         else {
-          console.log(err)
+          console.info(err)
         }
       }
       else {
-        console.log('unknown error')
+        console.info('unknown error')
       }
+      process.exit(1)
     })
 
 }
