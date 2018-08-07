@@ -24,7 +24,7 @@ if (args && args.cmd) {
     .then(ret => {
       ret && console.log(ret)
     })
-    .catch((err) => {
+    .catch(err => {
       if (typeof err === 'string') {
         console.log(err)
       }

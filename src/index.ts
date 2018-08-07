@@ -35,7 +35,7 @@ function parseCmd(args: string | number[]): string {
   let command = ''
 
   for (let cmd of args) {
-    if (typeof cmd === 'string' ) {
+    if (typeof cmd === 'string') {
       cmd = cmd.toLowerCase()
       if (cmdSet.has(cmd)) {
         if (command) {
@@ -48,7 +48,7 @@ function parseCmd(args: string | number[]): string {
     }
   }
 
-  if ( ! command) {
+  if (! command) {
     throw new Error('command empty. should be ' + [...cmdSet].join('|'))
   }
   return command
@@ -127,10 +127,10 @@ function parseInitCenter(args: any): InitCenterArgs {
   let { name, path } = args
 
   name = String(name)
-  if ( ! name) {
+  if (! name) {
     throw new Error('value of name empty')
   }
-  if ( ! path) {
+  if (! path) {
     throw new Error('value of path empty')
   }
 
@@ -160,14 +160,14 @@ export function runCmd(args: CliArgs): Promise<string | void> {
 
 
 function init(): Promise<string> {
-  return myca.initDefaultCenter().then((centerPath) => {
+  return myca.initDefaultCenter().then(centerPath => {
     return `Default center created at path: "${centerPath}"`
   })
 }
 
 
 function initCa(options: myca.CaOpts): Promise<string> {
-  return myca.initCaCert(options).then((certRet) => {
+  return myca.initCaCert(options).then(certRet => {
     return `CA certificate created with:
   centerName: "${certRet.centerName}"
   crtFile: "${certRet.crtFile}"
@@ -178,7 +178,7 @@ function initCa(options: myca.CaOpts): Promise<string> {
 
 
 function issue(options: myca.CertOpts): Promise<string> {
-  return myca.genCert(options).then((ret) => {
+  return myca.genCert(options).then(ret => {
     return `Issue a Certificate with:
   pubKey: \n${ret.pubKey}\n
   pass: "${ret.pass}" ${ options.kind === 'server' ? `\n  privateKeyFile: "${ret.privateKeyFile}"` : ''}
