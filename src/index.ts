@@ -179,6 +179,7 @@ function initCa(options: myca.CaOpts): Promise<string> {
 
 
 function issue(options: myca.CertOpts): Promise<string> {
+  // tslint:disable:max-line-length
   return myca.genCert(options).then(ret => {
     return `Issue a Certificate with:
   pubKey: \n${ret.pubKey}\n
