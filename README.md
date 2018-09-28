@@ -1,6 +1,8 @@
 # myca-cli
 
-A command line for [myca](https://www.npmjs.com/package/myca) for creating my CA center, generating a self signed x509 certificate, issuing server certificate from node.js via openssl. Multiple center supported. RSA, EC(P-256, P-384) supported.
+A command line for [myca](https://www.npmjs.com/package/myca) for creating my CA center, 
+generating a self signed x509 certificate, issuing server certificate from node.js via openssl. 
+Multiple center supported. RSA, EC(P-256, P-384) supported.
 
 [![Version](https://img.shields.io/npm/v/myca-cli.svg)](https://www.npmjs.com/package/myca-cli)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -28,7 +30,7 @@ npm install -g myca-cli
 - Initialize CA cert of default center
   ```bash
   myca initca --days=10950 --pass=mycapass \
-    --cn="my root ca" --o="my company" --c=CN
+    --cn="my root ca" --o="my company" --c=CN \
   ```
   will output:
   ```bash
@@ -41,7 +43,7 @@ npm install -g myca-cli
 - Issue a RSA serve certificate
   ```bash
   myca issue --kind=server --days=730 --pass=fooo \
-    --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass
+    --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
   ```
 
   will output:
@@ -83,7 +85,7 @@ npm install -g myca-cli
 - Create self-signed EC CA certificate under center ec (default P-256)
   ```bash
   myca initca --days=10950 --pass=mycapass \
-    --cn="my root ca" --o="my company" --c=CN --centerName=ec --alg=ec
+    --cn="my root ca" --o="my company" --c=CN --centerName=ec --alg=ec \
   ```
 
   will output:
@@ -99,24 +101,24 @@ npm install -g myca-cli
   ```bash
   myca issue --kind=server --days=730 --pass=fooo \
     --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
-    --SAN="foo.waitingsong.com, bar.waitingsong.com"
+    --SAN="foo.waitingsong.com, bar.waitingsong.com" \
   ```
 
 - Issue a serve certificate with IP SANs
   ```bash
   myca issue --kind=server --days=730 --pass=fooo \
     --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
-    --ips=192.168.0.1
+    --ips=192.168.0.1 \
 
   myca issue --kind=server --days=730 --pass=fooo \
     --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
-    --ips="192.168.0.1, 192.168.0.2"
+    --ips="192.168.0.1, 192.168.0.2" \
   ```
 
 - Issue a RSA client p12/pfx certificate
   ```bash
   myca issue --kind=client --days=730 --pass=fooo \
-    --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass
+    --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
   ```
 
   will output:

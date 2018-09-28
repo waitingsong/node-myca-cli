@@ -1,6 +1,7 @@
 # myca-cli
 
-命令行调用 [myca](https://www.npmjs.com/package/myca) 创建自有 CA 中心（自签发CA证书或者上级CA签发的中级CA证书），签发自签名数字证书。支持创建多个 CA 中心。支持 RSA，EC（P-256, P-384）算法。
+命令行调用 [myca](https://www.npmjs.com/package/myca) 创建自有 CA 中心（自签发CA证书或者上级CA签发的中级CA证书），
+签发自签名数字证书。支持创建多个 CA 中心。支持 RSA，EC（P-256, P-384）算法。
 
 [![Version](https://img.shields.io/npm/v/myca-cli.svg)](https://www.npmjs.com/package/myca-cli)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
@@ -28,7 +29,7 @@ npm install -g myca-cli
 - 初始化默认中心的 CA 自签发证书
   ```bash
   myca initca --days=10950 --pass=mycapass \
-    --cn="my root ca" --o="my company" --c=CN
+    --cn="my root ca" --o="my company" --c=CN \
   ```
 
   输出:
@@ -42,7 +43,7 @@ npm install -g myca-cli
 - 签发一张 RSA 服务器证书
   ```bash
   myca issue --kind=server --days=730 --pass=fooo \
-    --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass
+    --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
   ```
 
   输出:
@@ -85,7 +86,7 @@ npm install -g myca-cli
 - 在 ec 中心下初始化自签发 EC CA 证书 (default P-256)
   ```bash
   myca initca --days=10950 --pass=mycapass \
-    --cn="my root ca" --o="my company" --c=CN --centerName=ec --alg=ec
+    --cn="my root ca" --o="my company" --c=CN --centerName=ec --alg=ec \
   ```
   输出:
   ```bash
@@ -100,25 +101,25 @@ npm install -g myca-cli
   ```bash
   myca issue --kind=server --days=730 --pass=fooo \
     --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
-    --SAN="foo.waitingsong.com, bar.waitingsong.com"
+    --SAN="foo.waitingsong.com, bar.waitingsong.com" \
   ```
 
 - 签发 SAN 多ip服务器证书
   ```bash
   myca issue --kind=server --days=730 --pass=fooo \
     --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
-    --ips=192.168.0.1
+    --ips=192.168.0.1 \
 
   myca issue --kind=server --days=730 --pass=fooo \
     --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
-    --ips="192.168.0.1, 192.168.0.2"
+    --ips="192.168.0.1, 192.168.0.2" \
   ```
 
 
 - 签发一张 RSA p12/pfx 客户端证书
   ```bash
   myca issue --kind=client --days=730 --pass=fooo \
-    --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass
+    --cn="waitingsong.com" --o="my company" --c=CN --caKeyPass=mycapass \
   ```
 
   输出:
