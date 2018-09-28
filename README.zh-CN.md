@@ -96,6 +96,13 @@ npm install -g myca-cli
     privateKeyFile: "c:\users\<user>\.myca-ec\ca.key"
   ```
 
+- 使用 ec 中心CA证书下签发 EC 服务器证书
+  ```bash
+  myca issue --kind=server --days=730 --pass=fooo \
+    --cn="foo.waitingsong.com" --o="my comany" --c=CN --caKeyPass=mycapass \
+    --centerName=ec --alg=ec \
+  ```
+
 
 - 签发 SAN 多域名服务器证书
   ```bash

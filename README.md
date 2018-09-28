@@ -96,6 +96,12 @@ npm install -g myca-cli
     privateKeyFile: "c:\users\<user>\.myca-ec\ca.key"
   ```
 
+- Issue a ec server certificate by center ec CA cert
+  ```bash
+  myca issue --kind=server --days=730 --pass=fooo \
+    --cn="foo.waitingsong.com" --o="my comany" --c=CN --caKeyPass=mycapass \
+    --centerName=ec --alg=ec \
+  ```
 
 - Issue a serve certificate with Domain Name SANs
   ```bash
