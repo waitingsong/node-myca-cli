@@ -68,7 +68,7 @@
     "all": true
   },
   "dependencies": {
-    "myca": "^2.0.3",
+    "myca": "^2.0.4",
     "rxjs": ">=6.2.0",
     "yargs": "^11.1.0"
   },
