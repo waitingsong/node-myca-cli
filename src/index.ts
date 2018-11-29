@@ -77,7 +77,12 @@ function parseOpts(cmd: string, options: {[prop: string]: string | number}): Cli
     const upperKey = key.toUpperCase()
 
     if (propMap.has(upperKey)) {
-      caOpts[<string> propMap.get(upperKey)] = options[key]
+      Object.defineProperty(caOpts, <string> propMap.get(upperKey), {
+        configurable: true,
+        enumerable: true,
+        writable: true,
+        value: options[key],
+      })
     }
   })
 
