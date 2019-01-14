@@ -7,6 +7,7 @@
  */
 
 import * as myca from 'myca'
+import * as yargs from 'yargs'
 
 const cmdSet = new Set(['init', 'initca', 'issue', 'initcenter'])
 
@@ -20,9 +21,9 @@ export interface CliArgs {
   options: myca.CaOpts | myca.CertOpts | InitCenterArgs | null // null for cmd:init
 }
 
-export function parseCliArgs(argv: {[prop: string]: string | number}): CliArgs {
+export function parseCliArgs(argv: typeof yargs.argv): CliArgs {
   const args = <CliArgs> {}
-  const cmdArr = <string | number[]> argv._
+  const cmdArr: string[] = argv._
 
   args.cmd = parseCmd(cmdArr)
   args.options = args.cmd === 'init' ? null : parseOpts(args.cmd , { ...argv, _: '' })
@@ -31,19 +32,17 @@ export function parseCliArgs(argv: {[prop: string]: string | number}): CliArgs {
 }
 
 
-function parseCmd(args: string | number[]): string {
+function parseCmd(args: string[]): string {
   let command = ''
 
   for (let cmd of args) {
-    if (typeof cmd === 'string') {
-      cmd = cmd.toLowerCase()
-      if (cmdSet.has(cmd)) {
-        if (command) {
-          throw new Error(`Duplicate command: "${cmd}" and "${command}"`)
-        }
-        else {
-          command = cmd
-        }
+    cmd = cmd.toLowerCase()
+    if (cmdSet.has(cmd)) {
+      if (command) {
+        throw new Error(`Duplicate command: "${cmd}" and "${command}"`)
+      }
+      else {
+        command = cmd
       }
     }
   }
