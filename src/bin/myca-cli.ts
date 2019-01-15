@@ -6,7 +6,8 @@
 import * as yargs from 'yargs'
 
 import * as cli from '../index'
-// console.log(yargs.argv)
+import { genCmdHelp, helpDefault } from '../lib/helper'
+// console.info(yargs.argv)
 
 let args!: cli.CliArgs
 
@@ -15,29 +16,40 @@ try {
 }
 catch (ex) {
   console.info(ex.message)
+  process.exit(1)
 }
 
+// console.info('-args)
+
 if (args && args.cmd) {
-  cli.runCmd(args)
-    .then(ret => {
-      ret && console.info(ret)
-    })
-    .catch(err => {
-      if (typeof err === 'string') {
-        console.info(err)
-      }
-      else if (err) {
+  if (args.needHelp) {
+    const msg = genCmdHelp(args.cmd)
+    console.info(msg)
+    process.exit(0)
+  }
+  else {
+    args.options = args.cmd === 'init' ? null : cli.parseOpts(args.cmd , { ...yargs.argv, _: '' })
+
+    cli.runCmd(args)
+      .then(ret => {
+        ret && console.info(ret)
+      })
+      .catch((err: Error) => {
         if (err.message) {
           console.info(err.message)
         }
         else {
           console.info(err)
         }
-      }
-      else {
-        console.info('unknown error')
-      }
-      process.exit(1)
-    })
 
+        return err.message.includes('-h')
+          ? process.exit(0)
+          : process.exit(1)
+      })
+  }
+}
+else {
+  const msg = helpDefault()
+  console.info(msg)
+  process.exit(0)
 }
