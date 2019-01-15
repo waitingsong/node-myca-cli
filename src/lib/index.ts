@@ -192,7 +192,6 @@ function issue(options: myca.CertOpts): Promise<string> {
 
 function initCenter(options: InitCenterArgs): Promise<string> {
   const { name, path } = options
-  console.info(options)
 
   return myca.initCenter(name, path).then(() => {
     return `center created with:
