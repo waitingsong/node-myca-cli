@@ -6,14 +6,16 @@
 import { log } from '@waiting/log'
 import * as yargs from 'yargs'
 
-import * as cli from '../index'
 import { genCmdHelp, helpDefault } from '../lib/helper'
+import { runCmd } from '../lib/index'
+import { CliArgs } from '../lib/model'
+import { parseCliArgs, parseOpts } from '../lib/parse-opts'
 // log(yargs.argv)
 
-let args!: cli.CliArgs
+let args!: CliArgs
 
 try {
-  args = cli.parseCliArgs(yargs.argv)
+  args = parseCliArgs(yargs.argv)
 }
 catch (ex) {
   log(ex.message)
@@ -28,14 +30,12 @@ if (args && args.cmd) {
     process.exit(0)
   }
   else {
-    args.options = args.cmd === 'init' ? null : cli.parseOpts(args.cmd , { ...yargs.argv, _: '' })
+    args.options = args.cmd === 'init' ? null : parseOpts(args.cmd , { ...yargs.argv, _: '' })
     args.debug && log(args)
 
-    cli.runCmd(args)
-      .then(ret => {
-        ret && log(ret)
-      })
-      .catch((err: Error) => {
+    runCmd(args).subscribe(
+      log,
+      (err: Error) => {
         if (err.message) {
           log(err.message)
         }
@@ -46,7 +46,9 @@ if (args && args.cmd) {
         return err.message.includes('-h')
           ? process.exit(0)
           : process.exit(1)
-      })
+      },
+    )
+
   }
 }
 else {
