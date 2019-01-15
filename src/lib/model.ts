@@ -12,4 +12,5 @@ export interface CliArgs {
   cmd: CmdType | void
   options: myca.CaOpts | myca.CertOpts | InitCenterArgs | null // null for cmd:init
   needHelp: boolean
+  debug: boolean
 }

@@ -1,19 +1,20 @@
+import { log } from '@waiting/log'
 import * as myca from 'myca'
 import * as yargs from 'yargs'
 
-import { cmdSet } from './config'
+import { cmdSet, initialCliArgs } from './config'
 import { helpDefault } from './helper'
 import { CliArgs, CmdType, InitCenterArgs } from './model'
 
 
 export function parseCliArgs(argv: typeof yargs.argv): CliArgs {
-  const args = <CliArgs> {}
+  const args: CliArgs = { ...initialCliArgs }
   const cmdArr: string[] = argv._
 
   args.cmd = parseCmd(cmdArr)
-  // args.options = args.cmd === 'init' ? null : parseOpts(args.cmd , { ...argv, _: '' })
   args.options = null
   args.needHelp = argv.h ? true : false
+  args.debug = argv.d ? true : false
 
   return args
 }
@@ -132,8 +133,9 @@ function parseInitCenter(args: any): InitCenterArgs {
 }
 
 export function runCmd(args: CliArgs): Promise<string | void> {
-  const { cmd, options } = args
+  const { cmd, options, debug } = args
 
+  debug && options && log(options)
   switch (cmd) {
     case 'init':
       return init()

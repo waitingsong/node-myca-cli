@@ -34,9 +34,12 @@ export function helpDefault(): string {
 export function helpInit(): string {
   const head = 'Usage: init [options]'
   const body = 'Valid options are:'
-  const opts = ` -h${tw2}Display this summary`
+  const opts = [
+    ` -h${tw2}Display this summary`,
+    ` -d${tw2}Display debug info`,
+  ]
 
-  return `${head}\n${body}\n${opts}`
+  return `${head}\n${body}\n${ opts.join('\n') }`
 }
 
 
@@ -45,6 +48,7 @@ export function helpInitca(): string {
   const body = 'Valid options are:'
   const opts = [
     ` -h${tw3}Display this summary`,
+    ` -d${tw3}Display debug info`,
     ` --centerName${tw2}Optinal. Contains no space. Default value default`,
     ` --alg${tw3}Optinal values: rsa | ec. Default value rsa`,
     ` --days${tw3}Default value 10950 (30years)`,
@@ -71,6 +75,7 @@ export function helpInitcenter(): string {
   const body = 'Valid options are:'
   const opts = [
     ` -h${tw2}Display this summary`,
+    ` -d${tw2}Display debug info`,
     ` --name${tw2}Center Name`,
     ` --path${tw2}Full path of the Center`,
   ]
@@ -84,6 +89,7 @@ export function helpIssue(): string {
   const body = 'Valid options are:'
   const opts = [
     ` -h${tw3}Display this summary`,
+    ` -d${tw3}Display debug info`,
     ` --kind${tw3}Values: 'ca' | 'server' | 'client'. Default value server`,
     ` --centerName${tw2}Optinal. Contains no space. Default value default`,
     ` --caKeyPass${tw2}Phrase for reading CA private key`,

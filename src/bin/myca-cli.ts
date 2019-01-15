@@ -3,11 +3,12 @@
  * command: init|initca|issue|initcenter  case insensitive
  */
 
+import { log } from '@waiting/log'
 import * as yargs from 'yargs'
 
 import * as cli from '../index'
 import { genCmdHelp, helpDefault } from '../lib/helper'
-// console.info(yargs.argv)
+// log(yargs.argv)
 
 let args!: cli.CliArgs
 
@@ -15,31 +16,31 @@ try {
   args = cli.parseCliArgs(yargs.argv)
 }
 catch (ex) {
-  console.info(ex.message)
+  log(ex.message)
   process.exit(1)
 }
 
-// console.info('-args)
 
 if (args && args.cmd) {
   if (args.needHelp) {
     const msg = genCmdHelp(args.cmd)
-    console.info(msg)
+    log(msg)
     process.exit(0)
   }
   else {
     args.options = args.cmd === 'init' ? null : cli.parseOpts(args.cmd , { ...yargs.argv, _: '' })
+    args.debug && log(args)
 
     cli.runCmd(args)
       .then(ret => {
-        ret && console.info(ret)
+        ret && log(ret)
       })
       .catch((err: Error) => {
         if (err.message) {
-          console.info(err.message)
+          log(err.message)
         }
         else {
-          console.info(err)
+          log(err)
         }
 
         return err.message.includes('-h')
@@ -50,6 +51,6 @@ if (args && args.cmd) {
 }
 else {
   const msg = helpDefault()
-  console.info(msg)
+  log(msg)
   process.exit(0)
 }
