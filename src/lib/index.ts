@@ -1,5 +1,6 @@
 import { log } from '@waiting/log'
 import * as myca from 'myca'
+import { Observable } from 'rxjs'
 import * as yargs from 'yargs'
 
 import { cmdSet, initialCliArgs } from './config'
@@ -155,14 +156,14 @@ export function runCmd(args: CliArgs): Promise<string | void> {
 }
 
 
-function init(): Promise<string> {
+function init(): Observable<string> {
   return myca.initDefaultCenter().then(centerPath => {
     return `Default center created at path: "${centerPath}"`
   })
 }
 
 
-function initCa(options: myca.CaOpts): Promise<string> {
+function initCa(options: myca.CaOpts): Observable<string> {
   return myca.initCaCert(options).then(certRet => {
     return `CA certificate created with:
   centerName: "${certRet.centerName}"
@@ -173,7 +174,7 @@ function initCa(options: myca.CaOpts): Promise<string> {
 }
 
 
-function issue(options: myca.CertOpts): Promise<string> {
+function issue(options: myca.CertOpts): Observable<string> {
   // tslint:disable:max-line-length
   return myca.genCert(options).then(ret => {
     return `Issue a Certificate with:
@@ -190,7 +191,7 @@ function issue(options: myca.CertOpts): Promise<string> {
   })
 }
 
-function initCenter(options: InitCenterArgs): Promise<string> {
+function initCenter(options: InitCenterArgs): Observable<string> {
   const { name, path } = options
 
   return myca.initCenter(name, path).then(() => {
