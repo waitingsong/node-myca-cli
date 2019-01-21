@@ -102,6 +102,7 @@
     "tslint-eslint-rules": "^5.4.0",
     "typescript": "^3.2.2"
   },
+  "preferGlobal": true,
   "scripts": {
     "bp:add": "git remote add bp https://github.com/waitingsong/npm-base",
     "bp:sync": "git fetch bp && git pull --no-edit bp master",
