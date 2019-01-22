@@ -77,7 +77,7 @@ export function helpInitcenter(): string {
     ` -h${tw2}Display this summary`,
     ` -d${tw2}Display debug info`,
     ` --name${tw2}Center Name`,
-    ` --path${tw2}Full path of the Center`,
+    ` --path${tw2}Optional. Full path of the Center`,
   ]
 
   return `${head}\n${body}\n${ opts.join('\n') }`

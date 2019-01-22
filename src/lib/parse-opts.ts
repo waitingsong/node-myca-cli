@@ -126,9 +126,6 @@ function parseInitCenter(args: any): InitCenterArgs {
   if (! name) {
     throw new Error('value of name empty')
   }
-  if (! path) {
-    throw new Error('value of path empty')
-  }
 
   return { name, path }
 }

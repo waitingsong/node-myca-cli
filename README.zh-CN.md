@@ -72,6 +72,7 @@ npm install -g myca-cli
 
 - 创建名为 ec 的中心
   ```bash
+  // path 参数可省略
   myca initcenter --name=ec --path="c:/users/<user>/.myca-ec"
   ```
 

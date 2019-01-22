@@ -5,7 +5,7 @@ export type CmdType = 'init' | 'initca' | 'issue' | 'initcenter'
 
 export interface InitCenterArgs {
   name: string
-  path: string
+  path?: string
 }
 
 export interface RunCmdArgs {

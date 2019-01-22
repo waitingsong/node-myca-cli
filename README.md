@@ -72,6 +72,7 @@ npm install -g myca-cli
 
 - Initialize a center named ec
   ```bash
+  // path can be omitted
   myca initcenter --name=ec --path="c:/users/<user>/.myca-ec"
   ```
 

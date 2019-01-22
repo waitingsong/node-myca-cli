@@ -1,7 +1,7 @@
 import { log } from '@waiting/log'
 import * as myca from 'myca'
 import { Observable } from 'rxjs'
-import { map } from 'rxjs/operators'
+import { map, mergeMap } from 'rxjs/operators'
 
 import { InitCenterArgs, RunCmdArgs } from './model'
 
@@ -73,10 +73,11 @@ function initCenter(options: InitCenterArgs): Observable<string> {
   const { name, path } = options
 
   return myca.initCenter(name, path).pipe(
-    map(() => {
+    mergeMap(() => myca.getCenterPath(name)),
+    map(centerPath => {
       return `center created with:
   centerName: "${name}"
-  path: "${path}"
+  path: "${centerPath}"
     `
     }),
   )
