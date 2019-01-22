@@ -3,10 +3,10 @@ import * as myca from 'myca'
 import { Observable } from 'rxjs'
 import { map } from 'rxjs/operators'
 
-import { CliArgs, InitCenterArgs } from './model'
+import { InitCenterArgs, RunCmdArgs } from './model'
 
 
-export function runCmd(args: CliArgs): Observable<string> {
+export function runCmd(args: RunCmdArgs): Observable<string> {
   const { cmd, options, debug } = args
 
   debug && options && log(options)

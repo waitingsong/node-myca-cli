@@ -8,9 +8,12 @@ export interface InitCenterArgs {
   path: string
 }
 
-export interface CliArgs {
+export interface RunCmdArgs {
   cmd: CmdType | void
   options: myca.CaOpts | myca.CertOpts | InitCenterArgs | null // null for cmd:init
-  needHelp: boolean
   debug: boolean
+}
+
+export interface CliArgs extends RunCmdArgs {
+  needHelp: boolean
 }
