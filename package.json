@@ -1,7 +1,7 @@
 {
   "name": "myca-cli",
   "author": "waiting",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "description": "command line of creating Self-signed CA certificate for development use and issue server or client certificates, generated using openssl",
   "keywords": [
     "CA",
