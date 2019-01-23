@@ -2,7 +2,7 @@ import { cmdSet, tw1, tw2, tw3 } from './config'
 import { CmdType } from './model'
 
 
-export function genCmdHelp(command: CmdType): string {
+export function genCmdHelp(command: CmdType | ''): string {
   switch (command) {
     case 'init':
       return helpInit()
